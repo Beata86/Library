@@ -1,5 +1,8 @@
-
+from src.library.Library import *
 from flask import Flask
-app = Flask(__name__)
 
-import src.api.views # noqa
+app = Flask(__name__)
+library = Library()
+
+import src.api.bookController # noqa
+import src.api.personController # noqa
