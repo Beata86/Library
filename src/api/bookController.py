@@ -5,8 +5,8 @@ import json
 
 @app.route('/books', methods=['POST'])
 def addBook():
-    title = request.args.get('title')
-    author = request.args.get('author')
+    title = request.form['title']
+    author = request.form['author']
     library.addBook(title, author)
     return str(len(library.books))
 
