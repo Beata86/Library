@@ -6,5 +6,18 @@ function addBook() {
         title: title,
         author: author
     };
-    $.post(url, params);
+    $.post(url, params, loadBooks);
+}
+
+function loadBooks() {
+    var url = window.location.origin + "/books";
+    $.get(url, displayBooks)
+
+}
+
+function displayBooks(books) {
+    var booksContainer = document.getElementById("books");
+    var node = document.createElement("div");
+    node.innerHTML = "nic nie napisze";
+    booksContainer.appendChild(node);
 }
