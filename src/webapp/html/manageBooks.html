@@ -6,10 +6,39 @@
             crossorigin="anonymous"></script>
         <script src="manageBooks.js"></script>
     </head>
-    <body>
-        <div> Autor <input id="author" /></div>
-        <div> Nazwa książki <input id="title"/> </div>
-        <button onclick="addBook()"> Dodaj książkę </button>
-        <div id="books"></div>
+    <style>
+        body {
+            background-color: powderblue;
+            font-family: verdana;
+        }
+        .addBookForm {
+            border: 1px solid black;
+            border-radius: 5px;
+            padding: 10px;
+        }
+        .addBookFormLabel {
+            width: 200px;
+            display: inline-block;
+        }
+        .addBookFormRow {
+            margin-bottom: 5px;
+        }
+    </style>
+    <body onload="loadBooks()">
+        <div class="addBookForm">
+
+            <div class="addBookFormRow">
+                <div class="addBookFormLabel">Autor</div>
+                <input id="author" />
+            </div>
+
+            <div class="addBookFormRow">
+                <div class="addBookFormLabel">Nazwa książki </div>
+                <input id="title"/>
+            </div>
+
+            <button onclick="addBook()"><strong>Dodaj książkę</strong></button>
+        </div>
+        <ol id="books"></ol>
     </body>
 </html>

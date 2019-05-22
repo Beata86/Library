@@ -11,13 +11,18 @@ function addBook() {
 
 function loadBooks() {
     var url = window.location.origin + "/books";
-    $.get(url, displayBooks)
-
+    $.getJSON(url, displayBooks)
 }
 
 function displayBooks(books) {
     var booksContainer = document.getElementById("books");
-    var node = document.createElement("div");
-    node.innerHTML = "nic nie napisze";
-    booksContainer.appendChild(node);
+    booksContainer.innerHTML = "";
+    books.forEach(displayBook);
+}
+
+function displayBook(book) {
+    var booksContainer = document.getElementById("books");
+    var div = document.createElement("li");
+    div.innerHTML = book.author + " " + book.title;
+    booksContainer.appendChild(div);
 }
