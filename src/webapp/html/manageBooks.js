@@ -5,6 +5,10 @@ function addBook() {
         title: titleInput.value,
         author: authorInput.value
     };
+    if (!params.title || !params.author) {
+        document.getElementById("addBookMesage").innerHTML = "Wprowadź wymagane dane";
+        return;
+    }
     $.ajax({
         url: window.location.origin + "/books",
         data: params,
