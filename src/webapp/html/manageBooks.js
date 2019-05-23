@@ -1,12 +1,20 @@
 function addBook() {
-    var author = document.getElementById("author").value;
-    var title = document.getElementById("title").value;
-    var url = window.location.origin + "/books";
+    var authorInput = document.getElementById("author");
+    var titleInput = document.getElementById("title");
     var params = {
-        title: title,
-        author: author
+        title: titleInput.value,
+        author: authorInput.value
     };
-    $.post(url, params, loadBooks);
+    $.ajax({
+        url: window.location.origin + "/books",
+        data: params,
+        type: 'POST',
+        success: function() {
+            titleInput.value = '';
+            authorInput.value = '';
+            loadBooks();
+        }
+    });
 }
 
 function loadBooks() {
@@ -25,4 +33,27 @@ function displayBook(book) {
     var div = document.createElement("li");
     div.innerHTML = book.author + " " + book.title;
     booksContainer.appendChild(div);
+}
+
+function removeBook() {
+    var bookNumberInput = document.getElementById("bookNumberToRemove");
+    if (isNaN(parseInt(bookNumberInput.value)) || !Number.isInteger(parseFloat(bookNumberInput.value))) {
+        document.getElementById("removeBookMesage").innerHTML = "Wpisz poprawny numer książki";
+        return;
+    }
+    var booksContainer = document.getElementById("books");
+    var bookNumber = parseInt(bookNumberInput.value);
+    if (bookNumber < 1 || bookNumber > booksContainer.childElementCount) {
+        document.getElementById("removeBookMesage").innerHTML = "Nie ma takiego numeru książki";
+        return;
+    }
+    $.ajax({
+        url: window.location.origin + "/books?bookNumber=" + bookNumberInput.value,
+        type: 'DELETE',
+        success: function() {
+            bookNumberInput.value = '';
+            document.getElementById("removeBookMesage").innerHTML = "Książka została usunięta";
+            loadBooks();
+        }
+    });
 }

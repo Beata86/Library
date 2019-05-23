@@ -16,29 +16,50 @@
             border-radius: 5px;
             padding: 10px;
         }
-        .addBookFormLabel {
+        .formLabel {
             width: 200px;
             display: inline-block;
         }
-        .addBookFormRow {
+        .formRow {
             margin-bottom: 5px;
+        }
+        .removeBookForm {
+            border: 1px solid black;
+            border-radius: 5px;
+            padding: 10px;
+            margin-top: 10px;
+        }
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
         }
     </style>
     <body onload="loadBooks()">
         <div class="addBookForm">
 
-            <div class="addBookFormRow">
-                <div class="addBookFormLabel">Autor</div>
+            <div class="formRow">
+                <div class="formLabel">Autor</div>
                 <input id="author" />
             </div>
 
-            <div class="addBookFormRow">
-                <div class="addBookFormLabel">Nazwa książki </div>
+            <div class="formRow">
+                <div class="formLabel">Nazwa książki </div>
                 <input id="title"/>
             </div>
 
             <button onclick="addBook()"><strong>Dodaj książkę</strong></button>
         </div>
+
+        <div class="removeBookForm">
+             <div class="formRow">
+                <div class="formLabel">Nr książki do usunięcia</div>
+                <input type="number" id="bookNumberToRemove" />
+            </div>
+             <button onclick="removeBook()"><strong>Usuń książkę</strong></button>
+            <div id="removeBookMesage"></div>
+        </div>
+
         <ol id="books"></ol>
     </body>
 </html>
