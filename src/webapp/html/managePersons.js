@@ -12,7 +12,7 @@ function addPerson() {
         height: heightInput.value
     };
     if (!params.name || !params.surname || !params.gender || !params.age || !params.height) {
-        document.getElementById("addPersonMesage").innerHTML = "Wprowadź wymagane dane";
+        document.getElementById("addPersonMessage").innerHTML = "Wprowadź wymagane dane";
         return;
     }
     $.ajax({
@@ -51,13 +51,13 @@ function displayPerson(person) {
 function removePerson() {
     var personNumberInput = document.getElementById("personNumberToRemove");
     if (isNaN(parseInt(personNumberInput.value)) || !Number.isInteger(parseFloat(personNumberInput.value))) {
-        document.getElementById("removePersonMesage").innerHTML = "Wpisz poprawny numer osoby";
+        document.getElementById("removePersonMessage").innerHTML = "Wpisz poprawny numer osoby";
         return;
     }
     var personsContainer = document.getElementById("persons");
     var personNumber = parseInt(personNumberInput.value);
     if (personNumber < 1 || personNumber > personsContainer.childElementCount) {
-        document.getElementById("removePersonMesage").innerHTML = "Nie ma takiego numeru osoby";
+        document.getElementById("removePersonMessage").innerHTML = "Nie ma takiego numeru osoby";
         return;
     }
     $.ajax({
@@ -65,7 +65,7 @@ function removePerson() {
         type: 'DELETE',
         success: function() {
             personNumberInput.value = '';
-            document.getElementById("removePersonMesage").innerHTML = "Osoba została usunięta";
+            document.getElementById("removePersonMessage").innerHTML = "Osoba została usunięta";
             loadPersons();
         }
     });

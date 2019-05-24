@@ -6,7 +6,7 @@ function addBook() {
         author: authorInput.value
     };
     if (!params.title || !params.author) {
-        document.getElementById("addBookMesage").innerHTML = "Wprowadź wymagane dane";
+        document.getElementById("addBookMessage").innerHTML = "Wprowadź wymagane dane";
         return;
     }
     $.ajax({
@@ -42,13 +42,13 @@ function displayBook(book) {
 function removeBook() {
     var bookNumberInput = document.getElementById("bookNumberToRemove");
     if (isNaN(parseInt(bookNumberInput.value)) || !Number.isInteger(parseFloat(bookNumberInput.value))) {
-        document.getElementById("removeBookMesage").innerHTML = "Wpisz poprawny numer książki";
+        document.getElementById("removeBookMessage").innerHTML = "Wpisz poprawny numer książki";
         return;
     }
     var booksContainer = document.getElementById("books");
     var bookNumber = parseInt(bookNumberInput.value);
     if (bookNumber < 1 || bookNumber > booksContainer.childElementCount) {
-        document.getElementById("removeBookMesage").innerHTML = "Nie ma takiego numeru książki";
+        document.getElementById("removeBookMessage").innerHTML = "Nie ma takiego numeru książki";
         return;
     }
     $.ajax({
@@ -56,7 +56,7 @@ function removeBook() {
         type: 'DELETE',
         success: function() {
             bookNumberInput.value = '';
-            document.getElementById("removeBookMesage").innerHTML = "Książka została usunięta";
+            document.getElementById("removeBookMessage").innerHTML = "Książka została usunięta";
             loadBooks();
         }
     });
