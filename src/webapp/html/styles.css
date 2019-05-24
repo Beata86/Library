@@ -29,3 +29,28 @@ input[type=number]::-webkit-outer-spin-button {
     border-bottom: 1px solid black;
     padding: 3px;
 }
+
+.pageHeader {
+    background-color: Salmon;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    font-family: monospace;
+    border-bottom: 1px solid black;
+}
+
+.pageContent {
+    padding: 10px;
+}
+
+.nav {
+    background-color: Salmon;
+    padding: 6px;
+    border-bottom: 1px solid black;
+}
+
+.nav a {
+    margin-left: 20px;
+}
