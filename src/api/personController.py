@@ -5,11 +5,11 @@ import json
 
 @app.route('/persons', methods=['POST'])
 def addPerson():
-    name = request.args.get('name')
-    surname = request.args.get('surname')
-    gender = request.args.get('gender')
-    age = int(request.args.get('age'))
-    height = int(request.args.get('height'))
+    name = request.form['name']
+    surname = request.form['surname']
+    gender = request.form['gender']
+    age = int(request.form['age'])
+    height = int(request.form['height'])
     library.addPerson(name, surname, gender, age, height)
     return str(len(library.persons))
 

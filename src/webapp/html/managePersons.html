@@ -1,0 +1,58 @@
+<html>
+    <head>
+        <script
+            src="https://code.jquery.com/jquery-3.4.1.js"
+            integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+            crossorigin="anonymous"></script>
+        <script src="managePersons.js"></script>
+        <link rel="stylesheet" type="text/css" href="styles.css">
+    </head>
+    <body onload="loadPersons()">
+        <div class="form">
+            <div class="formHeader">Dodaj osobę</div>
+            <div class="formInner">
+                <div class="formRow">
+                    <div class="formLabel">Imię</div>
+                    <input id="name" />
+                </div>
+
+                <div class="formRow">
+                    <div class="formLabel">Nazwisko </div>
+                    <input id="surname"/>
+                </div>
+
+                <div class="formRow">
+                    <div class="formLabel">Płeć </div>
+                    <input id="gender"/>
+                </div>
+
+                <div class="formRow">
+                    <div class="formLabel">Wiek </div>
+                    <input id="age"/>
+                </div>
+
+                <div class="formRow">
+                    <div class="formLabel">Wzrost </div>
+                    <input id="height"/>
+                </div>
+
+                <button onclick="addPerson()"><strong>Dodaj osobę</strong></button>
+                <div id="addPersonMesage"></div>
+            </div>
+        </div>
+
+        <div class="form">
+            <div class="formHeader">Usuń osobę</div>
+            <div class="formInner">
+                <div class="formRow">
+                    <div class="formLabel">Nr osoby do usunięcia</div>
+                    <input type="number" id="personNumberToRemove" />
+                </div>
+                <button onclick="removePerson()"><strong>Usuń osobę</strong></button>
+                <div id="removePersonMesage"></div>
+            </div>
+        </div>
+        <div>Lista osób:</div>
+        <ol id="persons"></ol>
+    </body>
+</html>

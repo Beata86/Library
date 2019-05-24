@@ -1,5 +1,5 @@
 body {
-    background-color: powderblue;
+    background-color: Silver;
     font-family: verdana;
 }
 .form {
@@ -23,7 +23,7 @@ input[type=number]::-webkit-outer-spin-button {
     margin: 0;
 }
 .formHeader {
-    background-color: Wheat;
+    background-color: Gold;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
     border-bottom: 1px solid black;
