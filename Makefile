@@ -1,3 +1,8 @@
+SERVICE_NAME=library
+MY_DOCKER_NAME=$(SERVICE_NAME)
+USERNAME=beata86
+TAG=$(USERNAME)/$(MY_DOCKER_NAME)
+
 .PHONY: test
 deps:
 	pip install -r requirements.txt; \
@@ -15,3 +20,24 @@ lint:
 test:
 	PYTHONPATH=. py.test  --verbose -s
 
+docker_build:
+	docker build -t $(MY_DOCKER_NAME) .
+
+docker_run: docker_build
+	docker run \
+	   --name $(SERVICE_NAME)-dev \
+	    -p 5000:5000 \
+	    -d $(MY_DOCKER_NAME)
+
+docker_stop:
+	docker stop $(SERVICE_NAME)-dev
+
+docker_clean: docker_stop
+	docker rm $(SERVICE_NAME)-dev
+	docker rmi $(MY_DOCKER_NAME)
+
+docker_push: docker_build
+	@docker login --username $(USERNAME) --password $${DOCKER_PASSWORD}; \
+	docker tag $(MY_DOCKER_NAME) $(TAG); \
+	docker push $(TAG); \
+	docker logout;
