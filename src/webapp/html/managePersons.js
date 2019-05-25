@@ -74,6 +74,9 @@ function removePerson() {
             personNumberInput.value = '';
             document.getElementById("removePersonMessage").innerHTML = "Osoba została usunięta";
             loadPersons();
+        },
+        error: function(response) {
+            document.getElementById("removePersonMessage").innerHTML = response.responseText;
         }
     });
 }

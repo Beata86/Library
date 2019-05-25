@@ -2,6 +2,7 @@ from src.api import app
 from src.api import library
 from flask import request
 import json
+from src.library.PersonInRentalException import *
 
 @app.route('/persons', methods=['POST'])
 def addPerson():
@@ -32,3 +33,7 @@ def removePerson():
     personNumber = int(request.args.get('personNumber'))
     library.removePerson(personNumber)
     return str(len(library.persons))
+
+@app.errorhandler(PersonInRentalException)
+def handlePersonRentalException(e):
+    return 'Osoba aktualnie wypożycza książkę', 400

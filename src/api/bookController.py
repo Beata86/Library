@@ -1,5 +1,6 @@
 from src.api import app
 from src.api import library
+from src.library.BookInRentalException import BookInRentalException
 from flask import request
 import json
 
@@ -27,3 +28,6 @@ def getBooks():
         jsonBooks.append(jsonBook)
     return json.dumps(jsonBooks)
 
+@app.errorhandler(BookInRentalException)
+def handleBookRentalException(e):
+    return 'Książka jest aktualnie w wypożyczeniu', 400

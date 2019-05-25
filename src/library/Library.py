@@ -3,7 +3,8 @@ from src.library.Person import *
 from src.library.BookRental import *
 from src.library.InvalidPersonNumberException import *
 from src.library.InvalidBookNumberException import *
-
+from src.library.BookInRentalException import *
+from src.library.PersonInRentalException import *
 
 class Library():
     def __init__(self):
@@ -31,6 +32,8 @@ class Library():
 
     def removePerson(self, number):
         if number >= 1 and number <= len(self.persons):
+            if self.isPersonInRental(self.persons[number - 1]):
+                raise PersonInRentalException()
             del self.persons[number - 1]
             print("Person number {} removed".format(number))
         else:
@@ -95,7 +98,21 @@ class Library():
 
     def removeBook(self, bookNumber):
         if bookNumber >= 1 and bookNumber <= len(self.books):
+            if self.isBookInRental(self.books[bookNumber - 1]):
+                raise BookInRentalException()
             del self.books[bookNumber - 1]
             print("Book number {} removed".format(bookNumber))
         else:
             raise InvalidBookNumberException()
+
+    def isBookInRental(self, book):
+        for rental in self.bookRentals:
+            if rental.book == book:
+                return True
+        return False
+
+    def isPersonInRental(self, person):
+        for rental in self.bookRentals:
+            if rental.person == person:
+                return True
+        return False

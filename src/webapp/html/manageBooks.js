@@ -60,6 +60,9 @@ function removeBook() {
             bookNumberInput.value = '';
             document.getElementById("removeBookMessage").innerHTML = "Książka została usunięta";
             loadBooks();
+        },
+        error: function(response) {
+            document.getElementById("removeBookMessage").innerHTML = response.responseText;
         }
     });
 }
