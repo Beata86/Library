@@ -31,7 +31,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .pageHeader {
-    background-color: Salmon;
+    background-color: #ce977b;
     height: 60px;
     display: flex;
     align-items: center;
@@ -46,11 +46,16 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .nav {
-    background-color: Salmon;
+    background-color: #ce977b;
     padding: 6px;
     border-bottom: 1px solid black;
 }
 
 .nav a {
     margin-left: 20px;
+}
+
+ol li {
+    list-style-type: decimal;
+    margin-left: 25px;
 }
