@@ -5,8 +5,8 @@ TAG=$(USERNAME)/$(MY_DOCKER_NAME)
 
 .PHONY: test
 deps:
-	pip install -r requirements.txt; \
-	pip install -r test_requirements.txt
+	pip3 install -r requirements.txt; \
+	pip3 install -r test_requirements.txt
 
 console_run:
 	PYTHONPATH=. python3 src/consoleMain.py
