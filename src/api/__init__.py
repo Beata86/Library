@@ -1,6 +1,6 @@
-from src.library.Library import *
+from src.library.Library import Library
 from flask import Flask
-from src.library.LibraryInitialization import *
+from src.library.LibraryInitialization import initializeLibrary
 
 app = Flask(__name__)
 library = Library()

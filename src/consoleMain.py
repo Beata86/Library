@@ -1,9 +1,15 @@
-from src.library.Library import *
-from src.library.LibraryInitialization import *
+from src.library.Library import Library
+from src.library.LibraryInitialization import initializeLibrary
+from src.library.InvalidPersonNumberException \
+    import InvalidPersonNumberException
+from src.library.InvalidBookNumberException \
+    import InvalidBookNumberException
+
 
 def printRentals(bookRentals):
     for rent in bookRentals:
         print(rent.getRentalInformation())
+
 
 def addRental(library):
     print("Enter person number")
@@ -15,16 +21,19 @@ def addRental(library):
     except InvalidPersonNumberException as exception:
         print(exception)
 
+
 def printPersons(persons):
     print("There are {} persons in the list".format(len(persons)))
     for x in range(len(persons)):
-        print("{}. ".format(x + 1), end ='')
+        print("{}. ".format(x + 1), end='')
         print(persons[x].getMessage())
+
 
 def removeRental(library):
     print("enter rental number")
     rentalNumber = int(input())
     library.removeRental(rentalNumber)
+
 
 def removeBook(library):
     print("enter book number")
@@ -63,6 +72,7 @@ def printMenu():
     print("Nacisnij 13, zeby usunac ksiazke")
     print("-----------------------------------------")
 
+
 def addBook(library):
     print("Enter title")
     title = input()
@@ -90,17 +100,20 @@ def addNewPerson(library):
     height = input()
     library.addPerson(name, surname, gender, old, height)
 
+
 def saveToFile(library):
     print("Enter file name")
     name = input()
     file = open(name, "w")
     library.saveToFile(file)
 
+
 def readFile(library):
     print("Enter file's name")
     filename = input()
     file = open(filename, "r")
     library.readFromFile(file)
+
 
 library = Library()
 initializeLibrary(library)
@@ -135,7 +148,8 @@ while True:
         heightFrom = int(input())
         print("Write height to")
         heightTo = int(input())
-        foundPersons = library.findPersons(ageFrom, ageTo, heightFrom, heightTo)
+        foundPersons = library\
+            .findPersons(ageFrom, ageTo, heightFrom, heightTo)
         printPersons(foundPersons)
 
     if choice == 6:

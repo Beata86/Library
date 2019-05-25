@@ -2,7 +2,8 @@ from src.api import app
 from src.api import library
 from flask import request
 import json
-from src.library.PersonInRentalException import *
+from src.library.PersonInRentalException import PersonInRentalException
+
 
 @app.route('/persons', methods=['POST'])
 def addPerson():
@@ -13,6 +14,7 @@ def addPerson():
     height = int(request.form['height'])
     library.addPerson(name, surname, gender, age, height)
     return str(len(library.persons))
+
 
 @app.route('/persons')
 def getPersons():
@@ -28,11 +30,13 @@ def getPersons():
         jsonPersons.append(jsonPerson)
     return json.dumps(jsonPersons)
 
+
 @app.route('/persons', methods=['DELETE'])
 def removePerson():
     personNumber = int(request.args.get('personNumber'))
     library.removePerson(personNumber)
     return str(len(library.persons))
+
 
 @app.errorhandler(PersonInRentalException)
 def handlePersonRentalException(e):

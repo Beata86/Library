@@ -7,4 +7,5 @@ class Book():
         return self.author + " " + self.title
 
     def getDescription(self):
-        return "Book title : {}, book author: {}".format(self.title, self.author)
+        return "Book title : {}, book author: {}"\
+            .format(self.title, self.author)

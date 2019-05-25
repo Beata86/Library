@@ -1,5 +1,10 @@
 import unittest
-from src.library.Library import *
+from src.library.InvalidBookNumberException import InvalidBookNumberException
+from src.library.InvalidPersonNumberException \
+    import InvalidPersonNumberException
+from src.library.BookInRentalException import BookInRentalException
+from src.library.PersonInRentalException import PersonInRentalException
+from src.library.Library import Library
 
 
 class Test_Library(unittest.TestCase):
@@ -35,7 +40,6 @@ class Test_Library(unittest.TestCase):
         self.assertEqual(1, len(self.library.persons))
         person = self.library.persons[0]
         self.assertEqual("Ewa", person.name)
-
 
     def test_addBookRental(self):
         self.library.addPerson("Joanna", "Kowalska", "woman", 33, 168)
@@ -89,7 +93,7 @@ class Test_Library(unittest.TestCase):
         try:
             self.library.addPerson("Joanna", "Kowalska", "woman", 33, 168)
             self.library.addBook("Nazwa ksiazki", "autor")
-            self.library.addBookRental(1,0)
+            self.library.addBookRental(1, 0)
             self.fail("Exception Expected")
         except InvalidPersonNumberException:
             pass
@@ -98,7 +102,7 @@ class Test_Library(unittest.TestCase):
         try:
             self.library.addPerson("Joanna", "Kowalska", "woman", 33, 168)
             self.library.addBook("Nazwa ksiazki", "autor")
-            self.library.addBookRental(1,100)
+            self.library.addBookRental(1, 100)
             self.fail("Exception Expected")
         except InvalidPersonNumberException:
             pass
@@ -107,7 +111,7 @@ class Test_Library(unittest.TestCase):
         try:
             self.library.addPerson("Joanna", "Kowalska", "woman", 33, 168)
             self.library.addBook("Nazwa ksiazki", "autor")
-            self.library.addBookRental(0,1)
+            self.library.addBookRental(0, 1)
             self.fail("Exception Expected")
         except InvalidBookNumberException:
             pass
@@ -120,7 +124,7 @@ class Test_Library(unittest.TestCase):
             self.fail("Exception Expected")
         except InvalidBookNumberException:
             pass
-        
+
     def test_shouldThrowExceptionWhenBookInRental(self):
         self.library.addPerson("Joanna", "Kowalska", "woman", 33, 168)
         self.library.addBook("Nazwa ksiazki", "autor")

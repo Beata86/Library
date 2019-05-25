@@ -4,6 +4,6 @@ class BookRental():
         self.book = book
 
     def getRentalInformation(self):
-        return "Book: {}, rented by person: {}".format(self.book.getAuthorAndBookTitle(), self.person.getFullName())
-
-
+        return "Book: {}, rented by person: {}"\
+            .format(self.book.getAuthorAndBookTitle(),
+                    self.person.getFullName())

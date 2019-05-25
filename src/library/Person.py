@@ -10,4 +10,6 @@ class Person():
         return self.name + " " + self.surname
 
     def getMessage(self):
-        return "My name is {}, my surname is {}, i.m a {}, i'm {} years old, my height is {}".format(self.name, self.surname, self.sex, self.age, self.height)
+        return "My name is {}, my surname is {}, i.m a {}, " \
+               "i'm {} years old, my height is {}"\
+            .format(self.name, self.surname, self.sex, self.age, self.height)

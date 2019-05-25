@@ -4,6 +4,7 @@ from src.library.BookInRentalException import BookInRentalException
 from flask import request
 import json
 
+
 @app.route('/books', methods=['POST'])
 def addBook():
     title = request.form['title']
@@ -11,11 +12,13 @@ def addBook():
     library.addBook(title, author)
     return str(len(library.books))
 
+
 @app.route('/books', methods=['DELETE'])
 def removeBook():
     bookNumber = int(request.args.get('bookNumber'))
     library.removeBook(bookNumber)
     return str(len(library.books))
+
 
 @app.route('/books')
 def getBooks():
@@ -27,6 +30,7 @@ def getBooks():
         }
         jsonBooks.append(jsonBook)
     return json.dumps(jsonBooks)
+
 
 @app.errorhandler(BookInRentalException)
 def handleBookRentalException(e):

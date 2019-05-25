@@ -3,6 +3,7 @@ from src.api import library
 from flask import request
 import json
 
+
 @app.route('/rentals', methods=['POST'])
 def addRental():
     bookNumber = int(request.form['bookNumber'])
@@ -10,11 +11,13 @@ def addRental():
     library.addBookRental(bookNumber, personNumber)
     return str(len(library.bookRentals))
 
+
 @app.route('/rentals', methods=['DELETE'])
 def removeRental():
     rentalNumber = int(request.args.get('rentalNumber'))
     library.removeRental(rentalNumber)
     return str(len(library.bookRentals))
+
 
 @app.route('/rentals')
 def getRentals():
@@ -35,4 +38,3 @@ def getRentals():
         }
         jsonRentals.append(jsonRental)
     return json.dumps(jsonRentals)
-

@@ -1,10 +1,15 @@
-from src.library.Book import *
-from src.library.Person import *
-from src.library.BookRental import *
-from src.library.InvalidPersonNumberException import *
-from src.library.InvalidBookNumberException import *
-from src.library.BookInRentalException import *
-from src.library.PersonInRentalException import *
+from src.library.Book import Book
+from src.library.Person import Person
+from src.library.BookRental import BookRental
+from src.library.InvalidPersonNumberException \
+    import InvalidPersonNumberException
+from src.library.InvalidBookNumberException \
+    import InvalidBookNumberException
+from src.library.BookInRentalException \
+    import BookInRentalException
+from src.library.PersonInRentalException \
+    import PersonInRentalException
+
 
 class Library():
     def __init__(self):
@@ -42,8 +47,10 @@ class Library():
     def findPersons(self, ageFrom, ageTo, heightFrom, heightTo):
         listOfFoundPersons = []
         for x in range(len(self.persons)):
-            if self.persons[x].age >= ageFrom and self.persons[x].age <= ageTo and self.persons[x].height >= heightFrom and self.persons[
-                x].height <= heightTo:
+            if self.persons[x].age >= ageFrom \
+                    and self.persons[x].age <= ageTo \
+                    and self.persons[x].height >= heightFrom \
+                    and self.persons[x].height <= heightTo:
                 listOfFoundPersons.append(self.persons[x])
         return listOfFoundPersons
 
