@@ -9,7 +9,7 @@ def initializeLibrary(library):
 
     library.addPerson("Ewa", "Kisiel", "kobieta", 26, 170)
     library.addPerson("Rafał", "Kowalski", "mężczyzna", 38, 180)
-    library.addPerson("Zdzisław", "Paleta", "mężczyzna", 35, 179)
+    library.addPerson("Wiesław", "Paleta", "mężczyzna", 35, 179)
     library.addPerson("Elżbieta", "Domagała", "kobieta", 45, 165)
     library.addPerson("Jan", "Wiśniewski", "mężczyzna", 60, 184)
 

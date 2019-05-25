@@ -51,11 +51,11 @@ class Test_Library(unittest.TestCase):
 
     def test_findPersons(self):
         self.library.addPerson("Joanna", "Kowalska", "woman", 33, 168)
-        self.library.addPerson("Grzegorz", "Stelmaczonek", "man", 35, 174)
+        self.library.addPerson("Wiesław", "Paleta", "man", 35, 174)
         self.library.addPerson("Ela", "Pajor", "woman", 62, 170)
         foundPersons = self.library.findPersons(30, 40, 170, 175)
         self.assertEqual(1, len(foundPersons))
-        self.assertEqual("Grzegorz", foundPersons[0].name)
+        self.assertEqual("Wiesław", foundPersons[0].name)
 
     def test_removePersonShouldRaiseExceptionWhenNumberTooLow(self):
         try:
