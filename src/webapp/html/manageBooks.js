@@ -41,13 +41,13 @@ function displayBook(book) {
 
 function removeBook() {
     var bookNumberInput = document.getElementById("bookNumberToRemove");
-    if (isNaN(parseInt(bookNumberInput.value)) || !Number.isInteger(parseFloat(bookNumberInput.value))) {
+    if (!isPositiveInteger(bookNumberInput.value)) {
         document.getElementById("removeBookMessage").innerHTML = "Wpisz poprawny numer książki";
         return;
     }
     var booksContainer = document.getElementById("books");
     var bookNumber = parseInt(bookNumberInput.value);
-    if (bookNumber < 1 || bookNumber > booksContainer.childElementCount) {
+    if (bookNumber > booksContainer.childElementCount) {
         document.getElementById("removeBookMessage").innerHTML = "Nie ma takiego numeru książki";
         return;
     }
@@ -60,4 +60,8 @@ function removeBook() {
             loadBooks();
         }
     });
+}
+
+function isPositiveInteger(value) {
+    return !isNaN(parseInt(value)) && Number.isInteger(parseFloat(value)) && parseInt(value) > 0
 }

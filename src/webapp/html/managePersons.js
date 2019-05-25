@@ -4,6 +4,7 @@ function addPerson() {
     var genderInput = document.getElementById("gender");
     var ageInput = document.getElementById("age");
     var heightInput = document.getElementById("height");
+    var messageInput = document.getElementById("addPersonMessage");
     var params = {
         name: nameInput.value,
         surname: surnameInput.value,
@@ -12,14 +13,20 @@ function addPerson() {
         height: heightInput.value
     };
     if (!params.name || !params.surname || !params.gender || !params.age || !params.height) {
-        document.getElementById("addPersonMessage").innerHTML = "Wprowadź wymagane dane";
+        messageInput.innerHTML = "Wprowadź wymagane dane";
         return;
     }
+    if (!isPositiveInteger(params.age) || !isPositiveInteger(params.height)) {
+        messageInput.innerHTML = "Wprowadź dodatanią liczbę całkowitą";
+        return;
+    }
+
     $.ajax({
         url: window.location.origin + "/persons",
         data: params,
         type: 'POST',
         success: function() {
+            messageInput.innerHTML = '';
             nameInput.value = '';
             surnameInput.value = '';
             genderInput.value = '';
@@ -69,4 +76,8 @@ function removePerson() {
             loadPersons();
         }
     });
+}
+
+function isPositiveInteger(value) {
+    return !isNaN(parseInt(value)) && Number.isInteger(parseFloat(value)) && parseInt(value) > 0
 }
