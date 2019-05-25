@@ -26,3 +26,9 @@ def getPersons():
         }
         jsonPersons.append(jsonPerson)
     return json.dumps(jsonPersons)
+
+@app.route('/persons', methods=['DELETE'])
+def removePerson():
+    personNumber = int(request.args.get('personNumber'))
+    library.removePerson(personNumber)
+    return str(len(library.persons))
