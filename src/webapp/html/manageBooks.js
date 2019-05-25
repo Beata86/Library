@@ -1,12 +1,13 @@
 function addBook() {
     var authorInput = document.getElementById("author");
     var titleInput = document.getElementById("title");
+    var addBookMessage = document.getElementById("addBookMessage");
     var params = {
         title: titleInput.value,
         author: authorInput.value
     };
     if (!params.title || !params.author) {
-        document.getElementById("addBookMessage").innerHTML = "Wprowadź wymagane dane";
+        addBookMessage.innerHTML = "Wprowadź wymagane dane";
         return;
     }
     $.ajax({
@@ -16,6 +17,7 @@ function addBook() {
         success: function() {
             titleInput.value = '';
             authorInput.value = '';
+            addBookMessage.innerHTML = 'Książka została dodana';
             loadBooks();
         }
     });
@@ -42,13 +44,13 @@ function displayBook(book) {
 function removeBook() {
     var bookNumberInput = document.getElementById("bookNumberToRemove");
     if (!isPositiveInteger(bookNumberInput.value)) {
-        document.getElementById("removeBookMessage").innerHTML = "Wpisz poprawny numer książki";
+        document.getElementById("removeBookMessage").innerHTML = "Wpisz poprawny numer wypożyczenia";
         return;
     }
     var booksContainer = document.getElementById("books");
     var bookNumber = parseInt(bookNumberInput.value);
     if (bookNumber > booksContainer.childElementCount) {
-        document.getElementById("removeBookMessage").innerHTML = "Nie ma takiego numeru książki";
+        document.getElementById("removeBookMessage").innerHTML = "Nie ma takiego numeru wypożyczenia";
         return;
     }
     $.ajax({
@@ -56,7 +58,7 @@ function removeBook() {
         type: 'DELETE',
         success: function() {
             bookNumberInput.value = '';
-            document.getElementById("removeBookMessage").innerHTML = "Książka została usunięta";
+            document.getElementById("removeBookMessage").innerHTML = "Wypożyczenie zostało usunięte";
             loadBooks();
         }
     });

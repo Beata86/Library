@@ -1,0 +1,55 @@
+<html>
+    <head>
+        <script
+            src="https://code.jquery.com/jquery-3.4.1.js"
+            integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+            crossorigin="anonymous"></script>
+        <script src="manageRentals.js"></script>
+        <link rel="stylesheet" type="text/css" href="zero.css">
+        <link rel="stylesheet" type="text/css" href="styles.css">
+    </head>
+    <body onload="loadRentals()">
+
+        <div class="pageHeader"><div>Biblioteka</div></div>
+        <div class="nav">
+            <a href="/html/manageBooks.html">Zarządzaj książkami</a>
+            <a href="/html/managePersons.html">Zarządzaj osobami</a>
+            <a href="#">Zarządzaj wypożyczeniami</a>
+        </div>
+
+        <div class="pageContent">
+            <div class="form">
+                <div class="formHeader">Dodaj wypożyczenie</div>
+                <div class="formInner">
+                    <div class="formRow">
+                        <div class="formLabel">Nr osoby</div>
+                        <input type="number" id="personNumber" />
+                    </div>
+
+                    <div class="formRow">
+                        <div class="formLabel">Nr książki</div>
+                        <input type="number" id="bookNumber"/>
+                    </div>
+
+                    <button onclick="addRental()"><strong>Dodaj wypożyczenie</strong></button>
+                    <div id="addRentalMessage"></div>
+                </div>
+            </div>
+
+            <div class="form">
+                <div class="formHeader">Usuń wypożyczenie</div>
+                <div class="formInner">
+                    <div class="formRow">
+                        <div class="formLabel">Nr wypożyczenia do usunięcia</div>
+                        <input type="number" id="rentalNumberToRemove" />
+                    </div>
+                    <button onclick="removeRental()"><strong>Usuń wypożyczenie</strong></button>
+                    <div id="removeRentalMessage"></div>
+                </div>
+            </div>
+            <div>Lista wypożyczeń:</div>
+            <ol id="rentals"></ol>
+        </div>
+
+    </body>
+</html>
