@@ -48,13 +48,13 @@ function displayRental(rental) {
 function removeRental() {
     var rentalNumberInput = document.getElementById("rentalNumberToRemove");
     if (!isPositiveInteger(rentalNumberInput.value)) {
-        document.getElementById("removeRentalMessage").innerHTML = "Wpisz poprawny numer książki";
+        document.getElementById("removeRentalMessage").innerHTML = "Wpisz poprawny numer wypożyczenia";
         return;
     }
     var rentalsContainer = document.getElementById("rentals");
     var rentalNumber = parseInt(rentalNumberInput.value);
     if (rentalNumber > rentalsContainer.childElementCount) {
-        document.getElementById("removeRentalMessage").innerHTML = "Nie ma takiego numeru książki";
+        document.getElementById("removeRentalMessage").innerHTML = "Nie ma takiego numeru wypożyczenia";
         return;
     }
     $.ajax({
@@ -62,7 +62,7 @@ function removeRental() {
         type: 'DELETE',
         success: function() {
             rentalNumberInput.value = '';
-            document.getElementById("removeRentalMessage").innerHTML = "Książka została usunięta";
+            document.getElementById("removeRentalMessage").innerHTML = "Wypożyczenie zostało usunięte";
             loadRentals();
         }
     });
