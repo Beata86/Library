@@ -35,7 +35,7 @@ function displayBooks(books) {
 function displayBook(book) {
     var booksContainer = document.getElementById("books");
     var div = document.createElement("li");
-    div.innerHTML = book.author + " " + book.title;
+    div.innerHTML = book.author + ", '" + book.title + "'";
     booksContainer.appendChild(div);
 }
 

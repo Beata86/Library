@@ -1,4 +1,5 @@
 from src.library.Library import *
+from src.library.LibraryInitialization import *
 
 def printRentals(bookRentals):
     for rent in bookRentals:
@@ -102,17 +103,7 @@ def readFile(library):
     library.readFromFile(file)
 
 library = Library()
-
-library.addBook("Zywot szczeniecia", "Kalafior Bancerz")
-library.addBook("Sztuka dziadostwa", "Grzegorz Stelmaczonek")
-
-library.addPerson("Ewa", "Bancerz","woman", 6, 175)
-library.addPerson("Beata", "Bancerz","woman", 18, 168)
-library.addPerson("Grzegorz", "Stelmaczonek","man", 35, 179)
-library.addPerson("Kris", "Lineham","man", 26, 183)
-library.addPerson("Roman", "Bancerz","man", 60, 190)
-
-library.addBookRental(1, 1)
+initializeLibrary(library)
 
 while True:
     printMenu()
