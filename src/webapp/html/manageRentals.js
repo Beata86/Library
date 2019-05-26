@@ -21,7 +21,7 @@ function addRental() {
         success: function() {
             bookNumberInput.value = '';
             personNumberInput.value = '';
-            messageInput.innerHTML = '';
+            messageInput.innerHTML = 'Wypożyczenie zostało dodane';
             loadRentals();
         }
     });

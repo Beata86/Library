@@ -32,6 +32,7 @@ function addPerson() {
             genderInput.value = '';
             ageInput.value = '';
             heightInput.value = '';
+            messageInput.innerHTML = 'Osoba została dodana';
             loadPersons();
         }
     });

@@ -43,6 +43,7 @@ class Test_ManageBooks(unittest.TestCase):
         del self.expectedBooks[4]
         self.verifyExpectedBooks()
         self.assertEqual("Książka została usunięta", self.driver.find_element_by_id("removeBookMessage").text)
+        self.assertEqual("", self.driver.find_element_by_id("bookNumberToRemove").text)
 
     # add book - fail cases
     def test_shouldNotAddBookWithoutAnAuthor(self):
@@ -79,6 +80,7 @@ class Test_ManageBooks(unittest.TestCase):
         self.driver.find_element_by_id("removeBookButton").click()
         self.verifyExpectedBooks()
         self.assertEqual("Wpisz poprawny numer książki", self.driver.find_element_by_id("removeBookMessage").text)
+
 
     def test_shouldNotRemoveBookNumberZero(self):
         self.driver.find_element_by_id("bookNumberToRemove").send_keys("0")
