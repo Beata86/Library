@@ -18,7 +18,7 @@ lint:
 	flake8 src test
 
 test:
-	PYTHONPATH=. py.test  --verbose -s
+	PYTHONPATH=. pytest --verbose -s test
 
 docker_build:
 	docker build -t $(MY_DOCKER_NAME) .
