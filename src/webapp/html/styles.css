@@ -41,6 +41,15 @@ input[type=number]::-webkit-outer-spin-button {
     border-bottom: 1px solid black;
 }
 
+.pageHeader div {
+    margin-left: 15px;
+}
+
+.pageHeader img {
+    width: 32px;
+    height: 32px;
+}
+
 .pageContent {
     padding: 10px;
 }
