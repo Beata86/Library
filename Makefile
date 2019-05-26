@@ -29,12 +29,19 @@ docker_run: docker_build
 	    -p 5000:5000 \
 	    -d $(MY_DOCKER_NAME)
 
+docker_run_remote:
+	docker run \
+	   --name $(SERVICE_NAME)-dev \
+	    -p 5000:5000 \
+	    -d $(USERNAME)/$(MY_DOCKER_NAME)
+
 docker_stop:
-	docker stop $(SERVICE_NAME)-dev
+	docker stop $(SERVICE_NAME)-dev || true
 
 docker_clean: docker_stop
-	docker rm $(SERVICE_NAME)-dev
-	docker rmi $(MY_DOCKER_NAME)
+	docker rm $(SERVICE_NAME)-dev || true
+	docker rmi $(MY_DOCKER_NAME) || true
+	docker rmi $(USERNAME)/$(MY_DOCKER_NAME) || true
 
 docker_push: docker_build
 	@docker login --username $(USERNAME) --password $${DOCKER_PASSWORD}; \
