@@ -1,6 +1,10 @@
 
 
 def initializeLibrary(library):
+    library.bookRentals = []
+    library.books = []
+    library.persons = []
+
     library.addBook("Darknet", "Eileen Ormsby")
     library.addBook("Dziewczyna o czterech palcach", "Marek Krajewski")
     library.addBook("\"W\" jak morderstwo", "Katarzyna Gacek")

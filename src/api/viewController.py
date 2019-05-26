@@ -1,6 +1,8 @@
 from src.api import app
 from flask import send_from_directory, redirect
 import src.serverMain as serverMain
+from src.library.LibraryInitialization import initializeLibrary
+from src.api import library
 import os
 
 
@@ -13,3 +15,9 @@ def send_html(path):
 @app.route('/')
 def hello():
     return redirect("/html/manageBooks.html")
+
+
+@app.route('/cleanup')
+def cleanup():
+    initializeLibrary(library)
+    return "I'm clean"
