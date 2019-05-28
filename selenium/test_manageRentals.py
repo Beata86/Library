@@ -125,6 +125,41 @@ class Test_ManageRentals(unittest.TestCase):
         self.verifyExpectedRentals()
         self.assertEqual("Książka o podanym numerze nie istnieje", self.driver.find_element_by_id("addRentalMessage").text)
 
+    def test_shouldRemoveRentalWithNumberDoesNotExist(self):
+        self.driver.find_element_by_id("rentalNumberToRemove").send_keys("100")
+        self.driver.find_element_by_id("removeRentalButton").click()
+        self.verifyExpectedRentals()
+        self.assertEqual("Nie ma takiego numeru wypożyczenia", self.driver.find_element_by_id("removeRentalMessage").text)
+
+    def test_shouldRemoveRentalWithNegativeNumber(self):
+        self.driver.find_element_by_id("rentalNumberToRemove").send_keys("-1")
+        self.driver.find_element_by_id("removeRentalButton").click()
+        self.verifyExpectedRentals()
+        self.assertEqual("Wpisz poprawny numer wypożyczenia", self.driver.find_element_by_id("removeRentalMessage").text)
+
+    def test_shouldRemoveRentalWithNumberZero(self):
+        self.driver.find_element_by_id("rentalNumberToRemove").send_keys("0")
+        self.driver.find_element_by_id("removeRentalButton").click()
+        self.verifyExpectedRentals()
+        self.assertEqual("Wpisz poprawny numer wypożyczenia", self.driver.find_element_by_id("removeRentalMessage").text)
+
+    def test_shouldRemoveRentalWithText(self):
+        self.driver.find_element_by_id("rentalNumberToRemove").send_keys("tekst")
+        self.assertEqual("", self.driver.find_element_by_id("rentalNumberToRemove").text)
+
+    def test_shouldRemoveRentalWithEmptyField(self):
+        self.driver.find_element_by_id("rentalNumberToRemove").send_keys("")
+        self.driver.find_element_by_id("removeRentalButton").click()
+        self.verifyExpectedRentals()
+        self.assertEqual("Wpisz poprawny numer wypożyczenia", self.driver.find_element_by_id("removeRentalMessage").text)
+
+    def test_shouldRemoveRentalWithFloatingPointNumber(self):
+        self.driver.find_element_by_id("rentalNumberToRemove").send_keys("2.2")
+        self.driver.find_element_by_id("removeRentalButton").click()
+        self.verifyExpectedRentals()
+        self.assertEqual("Wpisz poprawny numer wypożyczenia",
+                         self.driver.find_element_by_id("removeRentalMessage").text)
+
     def verifyExpectedRentals(self):
         rentals = WebDriverWait(self.driver, 3).until(EC.presence_of_all_elements_located((By.XPATH, "//*[@id='rentals']/*")))
         self.assertEqual(len(self.expectedRentals), len(rentals))
