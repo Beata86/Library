@@ -3,6 +3,8 @@ from src.api import library
 from flask import request
 import json
 from src.library.PersonInRentalException import PersonInRentalException
+from src.library.InvalidPersonNumberException \
+    import InvalidPersonNumberException
 
 
 @app.route('/persons', methods=['POST'])
@@ -41,3 +43,8 @@ def removePerson():
 @app.errorhandler(PersonInRentalException)
 def handlePersonRentalException(e):
     return 'Osoba aktualnie wypożycza książkę', 400
+
+
+@app.errorhandler(InvalidPersonNumberException)
+def handleInvalidPersonNumberException(e):
+    return 'Osoba o podanym numerze nie istnieje', 400

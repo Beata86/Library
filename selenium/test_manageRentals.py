@@ -61,7 +61,6 @@ class Test_ManageRentals(unittest.TestCase):
         self.verifyExpectedRentals()
         self.assertEqual("Wprowadź dodatanią liczbę całkowitą", self.driver.find_element_by_id("addRentalMessage").text)
 
-
     def test_shouldNotAddRentalWithNegativeBookNumber(self):
         self.driver.find_element_by_id("personNumber").send_keys("1")
         self.driver.find_element_by_id("bookNumber").send_keys("-2")
@@ -95,6 +94,36 @@ class Test_ManageRentals(unittest.TestCase):
     def test_bookNumberFieldShouldNotAcceptText(self):
         self.driver.find_element_by_id("bookNumber").send_keys("tekst")
         self.assertEqual("", self.driver.find_element_by_id("bookNumber").text)
+
+    def test_shouldNotAddRentalWithPersonNumberThatDoesNotExist(self):
+        self.driver.find_element_by_id("personNumber").send_keys("100")
+        self.driver.find_element_by_id("bookNumber").send_keys("1")
+        self.driver.find_element_by_id("addRentalButton").click()
+        self.verifyExpectedRentals()
+        self.assertEqual("Osoba o podanym numerze nie istnieje", self.driver.find_element_by_id("addRentalMessage").text)
+
+    def test_shouldNotAddRentalWithoutPersonNumber(self):
+        self.driver.find_element_by_id("personNumber").send_keys("")
+        self.driver.find_element_by_id("bookNumber").send_keys("1")
+        self.driver.find_element_by_id("addRentalButton").click()
+        self.verifyExpectedRentals()
+        self.assertEqual("Wprowadź wymagane dane",
+                         self.driver.find_element_by_id("addRentalMessage").text)
+
+    def test_shouldNotAddRentalWithoutBookNumber(self):
+        self.driver.find_element_by_id("personNumber").send_keys("1")
+        self.driver.find_element_by_id("bookNumber").send_keys("")
+        self.driver.find_element_by_id("addRentalButton").click()
+        self.verifyExpectedRentals()
+        self.assertEqual("Wprowadź wymagane dane",
+                         self.driver.find_element_by_id("addRentalMessage").text)
+
+    def test_shouldNotAddRentalWithBookNumberThatDoesNotExist(self):
+        self.driver.find_element_by_id("personNumber").send_keys("1")
+        self.driver.find_element_by_id("bookNumber").send_keys("100")
+        self.driver.find_element_by_id("addRentalButton").click()
+        self.verifyExpectedRentals()
+        self.assertEqual("Książka o podanym numerze nie istnieje", self.driver.find_element_by_id("addRentalMessage").text)
 
     def verifyExpectedRentals(self):
         rentals = WebDriverWait(self.driver, 3).until(EC.presence_of_all_elements_located((By.XPATH, "//*[@id='rentals']/*")))

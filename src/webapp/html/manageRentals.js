@@ -23,6 +23,9 @@ function addRental() {
             personNumberInput.value = '';
             messageInput.innerHTML = 'Wypożyczenie zostało dodane';
             loadRentals();
+        },
+        error: function(response) {
+            messageInput.innerHTML = response.responseText;
         }
     });
 }

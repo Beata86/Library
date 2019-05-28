@@ -1,6 +1,7 @@
 from src.api import app
 from src.api import library
 from src.library.BookInRentalException import BookInRentalException
+from src.library.InvalidBookNumberException import InvalidBookNumberException
 from flask import request
 import json
 
@@ -35,3 +36,8 @@ def getBooks():
 @app.errorhandler(BookInRentalException)
 def handleBookRentalException(e):
     return 'Książka jest aktualnie w wypożyczeniu', 400
+
+
+@app.errorhandler(InvalidBookNumberException)
+def handleInvalidBookNumberException(e):
+    return 'Książka o podanym numerze nie istnieje', 400
