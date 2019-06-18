@@ -1,12 +1,14 @@
 function addBook() {
     var authorInput = document.getElementById("author");
     var titleInput = document.getElementById("title");
+    var numberOfPagesInput = document.getElementById("numberOfPages");
     var addBookMessage = document.getElementById("addBookMessage");
     var params = {
         title: titleInput.value,
-        author: authorInput.value
+        author: authorInput.value,
+        numberOfPages: numberOfPages.value
     };
-    if (!params.title || !params.author) {
+    if (!params.title || !params.author || !params.numberOfPages) {
         addBookMessage.innerHTML = "Wprowadź wymagane dane";
         return;
     }
@@ -17,6 +19,7 @@ function addBook() {
         success: function() {
             titleInput.value = '';
             authorInput.value = '';
+            numberOfPages.value = '';
             addBookMessage.innerHTML = 'Książka została dodana';
             loadBooks();
         }
@@ -37,7 +40,7 @@ function displayBooks(books) {
 function displayBook(book) {
     var booksContainer = document.getElementById("books");
     var div = document.createElement("li");
-    div.innerHTML = book.author + ", '" + book.title + "'";
+    div.innerHTML = book.author + ", '" + book.title + "', liczba stron: " + book.numberOfPages;
     booksContainer.appendChild(div);
 }
 

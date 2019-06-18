@@ -10,7 +10,8 @@ import json
 def addBook():
     title = request.form['title']
     author = request.form['author']
-    library.addBook(title, author, 0)
+    numberOfPages = request.form['numberOfPages']
+    library.addBook(title, author, numberOfPages)
     return str(len(library.books))
 
 
@@ -27,7 +28,8 @@ def getBooks():
     for book in library.books:
         jsonBook = {
             "title": book.title,
-            "author": book.author
+            "author": book.author,
+            "numberOfPages": book.numberOfPages
         }
         jsonBooks.append(jsonBook)
     return json.dumps(jsonBooks)
