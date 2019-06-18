@@ -58,7 +58,7 @@ def removeBook(library):
 def printMenu():
     print("-----------------------------------------")
     print("Naciśnij 1, zeby dodac osobe")
-    print("Naciśnij 2, zeby wyswietlic liste")
+    print("Naciśnij 2, zeby wyswietlic liste osob")
     print("Naciśnij 3, żeby usunac osobę")
     print("Naciśnij 4, zeby wyszukać osoby")
     print("Naciśnij 5, zeby wyjść")
@@ -78,7 +78,9 @@ def addBook(library):
     title = input()
     print("Enter author")
     author = input()
-    library.addBook(title, author)
+    print("Enter number of pages")
+    numberOfPages = int(input())
+    library.addBook(title, author, numberOfPages)
 
 
 def showBooksList(books):

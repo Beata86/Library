@@ -10,7 +10,7 @@ import json
 def addBook():
     title = request.form['title']
     author = request.form['author']
-    library.addBook(title, author)
+    library.addBook(title, author, 0)
     return str(len(library.books))
 
 

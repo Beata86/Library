@@ -26,12 +26,13 @@ class Test_Library(unittest.TestCase):
 
     def test_libraryAddBook(self):
         self.assertEqual(0, len(self.library.books))
-        self.library.addBook("Nazwa ksiazki", "autor")
+        self.library.addBook("Nazwa ksiazki", "autor", 200)
         numberOfBooks = len(self.library.books)
         self.assertEqual(1, numberOfBooks)
         book = self.library.books[0]
         self.assertEqual("Nazwa ksiazki", book.title)
         self.assertEqual("autor", book.author)
+        self.assertEqual(200, book.numberOfPages)
 
     def test_libraryRemovePerson(self):
         self.library.addPerson("Joanna", "Kowalska", "woman", 33, 168)
@@ -43,7 +44,7 @@ class Test_Library(unittest.TestCase):
 
     def test_addBookRental(self):
         self.library.addPerson("Joanna", "Kowalska", "woman", 33, 168)
-        self.library.addBook("Nazwa ksiazki", "autor")
+        self.library.addBook("Nazwa ksiazki", "autor", 0)
         self.library.addBookRental(1, 1)
         numberOfRentals = len(self.library.bookRentals)
         self.assertEqual(1, numberOfRentals)
@@ -92,7 +93,7 @@ class Test_Library(unittest.TestCase):
     def test_addBookRentalShouldRaiseExceptionWhenPersonNumberTooLow(self):
         try:
             self.library.addPerson("Joanna", "Kowalska", "woman", 33, 168)
-            self.library.addBook("Nazwa ksiazki", "autor")
+            self.library.addBook("Nazwa ksiazki", "autor", 0)
             self.library.addBookRental(1, 0)
             self.fail("Exception Expected")
         except InvalidPersonNumberException:
@@ -101,7 +102,7 @@ class Test_Library(unittest.TestCase):
     def test_addBookRentalShouldRaiseExceptionWhenPersonNumberTooHigh(self):
         try:
             self.library.addPerson("Joanna", "Kowalska", "woman", 33, 168)
-            self.library.addBook("Nazwa ksiazki", "autor")
+            self.library.addBook("Nazwa ksiazki", "autor", 0)
             self.library.addBookRental(1, 100)
             self.fail("Exception Expected")
         except InvalidPersonNumberException:
@@ -110,7 +111,7 @@ class Test_Library(unittest.TestCase):
     def test_addBookRentalShouldRaiseExceptionWhenBookNumberTooLow(self):
         try:
             self.library.addPerson("Joanna", "Kowalska", "woman", 33, 168)
-            self.library.addBook("Nazwa ksiazki", "autor")
+            self.library.addBook("Nazwa ksiazki", "autor", 0)
             self.library.addBookRental(0, 1)
             self.fail("Exception Expected")
         except InvalidBookNumberException:
@@ -119,7 +120,7 @@ class Test_Library(unittest.TestCase):
     def test_addBookRentalShouldRaiseExceptionWhenBookNumberTooHigh(self):
         try:
             self.library.addPerson("Joanna", "Kowalska", "woman", 33, 168)
-            self.library.addBook("Nazwa ksiazki", "autor")
+            self.library.addBook("Nazwa ksiazki", "autor", 0)
             self.library.addBookRental(100, 1)
             self.fail("Exception Expected")
         except InvalidBookNumberException:
@@ -127,7 +128,7 @@ class Test_Library(unittest.TestCase):
 
     def test_shouldThrowExceptionWhenBookInRental(self):
         self.library.addPerson("Joanna", "Kowalska", "woman", 33, 168)
-        self.library.addBook("Nazwa ksiazki", "autor")
+        self.library.addBook("Nazwa ksiazki", "autor", 0)
         self.library.addBookRental(1, 1)
         try:
             self.library.removeBook(1)
@@ -137,7 +138,7 @@ class Test_Library(unittest.TestCase):
 
     def test_shouldThrowExceptionWhenPersonInRental(self):
         self.library.addPerson("Joanna", "Kowalska", "woman", 33, 168)
-        self.library.addBook("Nazwa ksiazki", "autor")
+        self.library.addBook("Nazwa ksiazki", "autor", 0)
         self.library.addBookRental(1, 1)
         try:
             self.library.removePerson(1)

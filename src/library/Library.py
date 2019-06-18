@@ -21,8 +21,8 @@ class Library():
         person = Person(name, surname, gender, age, height)
         self.persons.append(person)
 
-    def addBook(self, title, author):
-        book = Book(title, author)
+    def addBook(self, title, author, numberOfPages):
+        book = Book(title, author, numberOfPages)
         self.books.append(book)
 
     def addBookRental(self, bookNumber, personNumber):
