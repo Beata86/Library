@@ -1,3 +1,9 @@
+function findBooks() {
+    var findBooksInput = document.getElementById("findBooks");
+    var url = window.location.origin + "/books/find?value=" + findBooksInput.value;
+    $.getJSON(url, displayBooks);
+}
+
 function addBook() {
     var authorInput = document.getElementById("author");
     var titleInput = document.getElementById("title");
