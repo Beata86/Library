@@ -12,6 +12,10 @@ function addBook() {
         addBookMessage.innerHTML = "Wprowadź wymagane dane";
         return;
     }
+    if (!isPositiveInteger(params.numberOfPages)) {
+        addBookMessage.innerHTML = "Wprowadź poprawną liczbę stron";
+        return;
+    }
     $.ajax({
         url: window.location.origin + "/books",
         data: params,
