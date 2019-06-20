@@ -35,6 +35,21 @@ def getBooks():
     return json.dumps(jsonBooks)
 
 
+@app.route('/books/find')
+def findBooks():
+    value = request.args.get('value')
+    jsonBooks = []
+    books = library.findBooks(value)
+    for book in books:
+        jsonBook = {
+            "title": book.title,
+            "author": book.author,
+            "numberOfPages": book.numberOfPages
+        }
+        jsonBooks.append(jsonBook)
+    return json.dumps(jsonBooks)
+
+
 @app.errorhandler(BookInRentalException)
 def handleBookRentalException(e):
     return 'Książka jest aktualnie w wypożyczeniu', 400
