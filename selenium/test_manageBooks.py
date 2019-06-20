@@ -12,11 +12,11 @@ class Test_ManageBooks(unittest.TestCase):
         self.driver.get("http://localhost:5000/cleanup")
         self.driver.get("http://localhost:5000/html/manageBooks.html")
         self.expectedBooks = [
-            "Eileen Ormsby, 'Darknet'",
-            "Marek Krajewski, 'Dziewczyna o czterech palcach'",
-            "Katarzyna Gacek, '\"W\" jak morderstwo'",
-            "Maciej Wasielewski, 'Niewidzialna Ręka'",
-            "Robert Małecki, 'Wada'"
+            "Eileen Ormsby, 'Darknet', liczba stron: 250",
+            "Marek Krajewski, 'Dziewczyna o czterech palcach', liczba stron: 300",
+            "Katarzyna Gacek, '\"W\" jak morderstwo', liczba stron: 380",
+            "Maciej Wasielewski, 'Niewidzialna Ręka', liczba stron: 320",
+            "Robert Małecki, 'Wada', liczba stron: 400"
         ]
 
     def tearDown(self):
@@ -30,12 +30,14 @@ class Test_ManageBooks(unittest.TestCase):
     def test_shouldAddBook(self):
         self.driver.find_element_by_id("author").send_keys("Łukasz Orbitowski")
         self.driver.find_element_by_id("title").send_keys("Kult")
+        self.driver.find_element_by_id("numberOfPages").send_keys("380")
         self.driver.find_element_by_id("addBookButton").click()
-        self.expectedBooks.append("Łukasz Orbitowski, 'Kult'")
+        self.expectedBooks.append("Łukasz Orbitowski, 'Kult', liczba stron: 380")
         self.verifyExpectedBooks()
         self.assertEqual("Książka została dodana", self.driver.find_element_by_id("addBookMessage").text)
         self.assertEqual("", self.driver.find_element_by_id("author").text)
         self.assertEqual("", self.driver.find_element_by_id("title").text)
+        self.assertEqual("", self.driver.find_element_by_id("numberOfPages").text)
 
     def test_shouldRemoveBook(self):
         self.driver.find_element_by_id("bookNumberToRemove").send_keys("5")
@@ -58,12 +60,28 @@ class Test_ManageBooks(unittest.TestCase):
         self.assertEqual("Wprowadź wymagane dane", self.driver.find_element_by_id("addBookMessage").text)
         self.verifyExpectedBooks()
 
+    def test_shouldNotAddBokWithoutNumberOfPages(self):
+        self.driver.find_element_by_id("author").send_keys("Łukasz Orbitowski")
+        self.driver.find_element_by_id("title").send_keys("Kult")
+        self.driver.find_element_by_id("addBookButton").click()
+        self.assertEqual("Wprowadź wymagane dane", self.driver.find_element_by_id("addBookMessage").text)
+        self.verifyExpectedBooks()
+
+    def test_shouldNotAddBookWithNegativeNumberOfPages(self):
+        self.driver.find_element_by_id("author").send_keys("Łukasz Orbitowski")
+        self.driver.find_element_by_id("title").send_keys("Kult")
+        self.driver.find_element_by_id("numberOfPages").send_keys("-120")
+        self.driver.find_element_by_id("addBookButton").click()
+        self.assertEqual("Wprowadź poprawną liczbę stron", self.driver.find_element_by_id("addBookMessage").text)
+        self.verifyExpectedBooks()
+
     # remove book - book number format fail cases
     def test_shouldNotRemoveBookWithFloatingPointNumber(self):
         self.driver.find_element_by_id("bookNumberToRemove").send_keys("5.5")
         self.driver.find_element_by_id("removeBookButton").click()
         self.verifyExpectedBooks()
         self.assertEqual("Wpisz poprawny numer książki", self.driver.find_element_by_id("removeBookMessage").text)
+
 
     def test_shouldNotRemoveBookWithoutANumber(self):
         self.driver.find_element_by_id("removeBookButton").click()
@@ -101,6 +119,7 @@ class Test_ManageBooks(unittest.TestCase):
         self.assertEqual("Książka jest aktualnie w wypożyczeniu", self.driver.find_element_by_id("removeBookMessage").text)
 
     def verifyExpectedBooks(self):
+        # wait for 3 seconds
         books = WebDriverWait(self.driver, 3).until(EC.presence_of_all_elements_located((By.XPATH, "//*[@id='books']/*")))
         self.assertEqual(len(self.expectedBooks), len(books))
         for i in range(len(books)):
