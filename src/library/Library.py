@@ -54,6 +54,13 @@ class Library():
                 listOfFoundPersons.append(self.persons[x])
         return listOfFoundPersons
 
+    def findBooks(self, value):
+        listOfFoundBooks = []
+        for book in self.books:
+            if value in book.title or value in book.author:
+                listOfFoundBooks.append(book)
+        return listOfFoundBooks
+
     def saveToFile(self, file):
         file.write(str(len(self.persons)))
         file.write("\n")

@@ -145,3 +145,14 @@ class Test_Library(unittest.TestCase):
             self.fail("Exception Expected")
         except PersonInRentalException:
             pass
+
+    def test_shouldFindBooks(self):
+        self.library.addBook("aaa", "ppp", 240)
+        self.library.addBook("ppp", "aaa", 240)
+        self.library.addBook("abc", "abc", 240)
+        self.library.addBook("caaa", "baaa", 240)
+        books = self.library.findBooks("aaa")
+        self.assertEqual(3, len(books))
+        self.assertEqual("aaa", books[0].title)
+        self.assertEqual("aaa", books[1].author)
+        self.assertEqual("baaa", books[2].author)
