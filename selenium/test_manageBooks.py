@@ -118,6 +118,29 @@ class Test_ManageBooks(unittest.TestCase):
         self.verifyExpectedBooks()
         self.assertEqual("Książka jest aktualnie w wypożyczeniu", self.driver.find_element_by_id("removeBookMessage").text)
 
+    def test_shouldFindBooks(self):
+        self.driver.find_element_by_id("findBooks").send_keys("Ma")
+        self.driver.find_element_by_id("findBooksButton").click()
+        self.expectedBooks = [self.expectedBooks[1], self.expectedBooks[3], self.expectedBooks[4]]
+        self.verifyExpectedBooks()
+
+    def test_shouldFindBooksAfterAdding(self):
+        self.driver.find_element_by_id("author").send_keys("Łukaaasz Orbitowski")
+        self.driver.find_element_by_id("title").send_keys("Kult")
+        self.driver.find_element_by_id("numberOfPages").send_keys("380")
+        self.driver.find_element_by_id("addBookButton").click()
+        self.expectedBooks.append("Łukaaasz Orbitowski, 'Kult', liczba stron: 380")
+        self.verifyExpectedBooks()
+        self.assertEqual("Książka została dodana", self.driver.find_element_by_id("addBookMessage").text)
+        self.assertEqual("", self.driver.find_element_by_id("author").text)
+        self.assertEqual("", self.driver.find_element_by_id("title").text)
+        self.assertEqual("", self.driver.find_element_by_id("numberOfPages").text)
+        self.driver.find_element_by_id("findBooks").send_keys("aaa")
+        self.driver.find_element_by_id("findBooksButton").click()
+        self.expectedBooks = [self.expectedBooks[5]]
+        self.verifyExpectedBooks()
+
+
     def verifyExpectedBooks(self):
         # wait for 3 seconds
         books = WebDriverWait(self.driver, 3).until(EC.presence_of_all_elements_located((By.XPATH, "//*[@id='books']/*")))
