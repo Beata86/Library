@@ -44,7 +44,7 @@ class Library():
         else:
             raise InvalidPersonNumberException()
 
-    def findPersons(self, ageFrom, ageTo, heightFrom, heightTo):
+    def findPersonsByAgeAndHeight(self, ageFrom, ageTo, heightFrom, heightTo):
         listOfFoundPersons = []
         for x in range(len(self.persons)):
             if self.persons[x].age >= ageFrom \
@@ -60,6 +60,14 @@ class Library():
             if value in book.title or value in book.author:
                 listOfFoundBooks.append(book)
         return listOfFoundBooks
+
+    def findPersons(self, value):
+        listOfFoundPersons = []
+        for person in self.persons:
+            if value in person.name or value in person.surname \
+                    or value in person.sex:
+                listOfFoundPersons.append(person)
+        return listOfFoundPersons
 
     def saveToFile(self, file):
         file.write(str(len(self.persons)))

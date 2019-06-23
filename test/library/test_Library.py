@@ -54,11 +54,11 @@ class Test_Library(unittest.TestCase):
         author = bookRental.book.author
         self.assertEqual("autor", author)
 
-    def test_findPersons(self):
+    def test_findPersonsByAgeAndHeight(self):
         self.library.addPerson("Joanna", "Kowalska", "woman", 33, 168)
         self.library.addPerson("Wiesław", "Paleta", "man", 35, 174)
         self.library.addPerson("Ela", "Pajor", "woman", 62, 170)
-        foundPersons = self.library.findPersons(30, 40, 170, 175)
+        foundPersons = self.library.findPersonsByAgeAndHeight(30, 40, 170, 175)
         self.assertEqual(1, len(foundPersons))
         self.assertEqual("Wiesław", foundPersons[0].name)
 
@@ -156,3 +156,13 @@ class Test_Library(unittest.TestCase):
         self.assertEqual("aaa", books[0].title)
         self.assertEqual("aaa", books[1].author)
         self.assertEqual("baaa", books[2].author)
+
+    def test_findPersons(self):
+        self.library.addPerson("Grzegorz", "Brzęczyszczykiewicz", "mężczyzna", 29, 180)
+        self.library.addPerson("Ewelina", "Grzezińska", "kobieta", 28, 170)
+        self.library.addPerson("Rafał", "Kalafior", "mężczyzna", 30, 180)
+        foundPersons = self.library.findPersons("Grz")
+        self.assertEqual(2, len(foundPersons))
+        self.assertEqual("Grzegorz", foundPersons[0].name)
+        self.assertEqual("Grzezińska", foundPersons[1].surname)
+
